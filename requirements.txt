@@ -1,0 +1,18 @@
+seaborn
+Pandas
+numpy
+matplotlib
+telethon==1.36.0  # For Telegram scraping
+psycopg2-binary==2.9.9  # PostgreSQL driver
+dbt-core==1.8.0  # dbt for transformations
+dbt-postgres==1.8.0  # dbt PostgreSQL adapter
+ultralytics==8.2.0  # YOLOv8 for object detection
+fastapi==0.115.0  # FastAPI for API development
+uvicorn==0.30.1  # ASGI server for FastAPI
+pydantic==2.7.0  # Data validation for FastAPI
+python-dotenv==1.0.1  # Load .env variables
+dagster==1.7.0  # Pipeline orchestration
+dagster-webserver==1.7.0  # Dagster UI
+pytest==8.2.0  # Unit testing
+scikit-learn
+sqlalchemy 
