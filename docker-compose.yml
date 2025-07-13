@@ -13,8 +13,8 @@ services:
   db:
     image: postgres:15
     environment:
-      - POSTGRES_USER=tenx_user
-      - POSTGRES_PASSWORD=tenx_password
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=12345
       - POSTGRES_DB=tenx_db
     volumes:
       - pgdata:/var/lib/postgresql/data
