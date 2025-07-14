@@ -1,4 +1,3 @@
-version: '3.8'
 services:
   app:
     build:
@@ -13,11 +12,16 @@ services:
   db:
     image: postgres:15
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=12345
+      - PYTHONPATH=/app
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=tenx_user
+      - POSTGRES_PASSWORD=tenx_password
       - POSTGRES_DB=tenx_db
     volumes:
       - pgdata:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
     ports:
       - "5432:5432"
 volumes:
