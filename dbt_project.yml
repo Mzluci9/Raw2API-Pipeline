@@ -1,11 +1,12 @@
 name: 'tenx_dbt'
 version: '1.0.0'
 profile: 'tenx_dbt'
-
 model-paths: ["models"]
-
 models:
   tenx_dbt:
     staging:
       +schema: staging
       +materialized: view
+    marts:
+      +schema: marts
+      +materialized: table

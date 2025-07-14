@@ -1,5 +1,3 @@
--- models/staging/stg_telegram_messages.sql
-
 {{ config(materialized='view') }}
 
 SELECT
