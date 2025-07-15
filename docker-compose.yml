@@ -10,7 +10,8 @@ services:
     depends_on:
       - db
     ports:
-      - "8000:8000"
+      - "8000:8000"  # FastAPI
+      - "3000:3000"  # Dagster
   db:
     image: postgres:15
     environment:
