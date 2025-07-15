@@ -5,15 +5,24 @@ import psycopg2
 from dotenv import load_dotenv
 from datetime import datetime
 
-load_dotenv()
+# Adjust this path if your .env is not at project root relative to this script
+env_path = Path(__file__).parents[2] / '.env'
+load_dotenv(dotenv_path=env_path)
 
-# PostgreSQL connection
+# Debug: print env variables to check they loaded correctly
+print("POSTGRES_HOST:", os.getenv("POSTGRES_HOST"))
+print("POSTGRES_PORT:", os.getenv("POSTGRES_PORT"))
+print("POSTGRES_USER:", os.getenv("POSTGRES_USER"))
+print("POSTGRES_PASSWORD:", os.getenv("POSTGRES_PASSWORD"))
+print("POSTGRES_DB:", os.getenv("POSTGRES_DB"))
+
+# PostgreSQL connection parameters from environment variables
 conn_params = {
-    "host": os.getenv("POSTGRES_HOST"),
-    "port": os.getenv("POSTGRES_PORT"),
-    "user": os.getenv("POSTGRES_USER"),
-    "password": os.getenv("POSTGRES_PASSWORD"),
-    "database": os.getenv("POSTGRES_DB"),
+    "host": os.getenv("POSTGRES_HOST", "localhost"),
+    "port": os.getenv("POSTGRES_PORT", "5432"),
+    "user": os.getenv("POSTGRES_USER", "tenx_user"),
+    "password": os.getenv("POSTGRES_PASSWORD", ""),
+    "database": os.getenv("POSTGRES_DB", "tenx_db"),
 }
 
 def create_raw_table():
@@ -48,7 +57,7 @@ def load_json_to_postgres(json_path, channel_name):
                     msg["id"],
                     msg["date"],
                     msg["text"],
-                    msg["has_image"],
+                    msg.get("has_image", False),
                     json.dumps(msg)
                 ))
             conn.commit()

@@ -1,15 +1,11 @@
-# Use official Python slim image for smaller size
 FROM python:3.10-slim
-
-# Set working directory
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    libpq-dev \
+    gcc \
+    && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
-
-# Copy requirements and install
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy project files
 COPY . .
-
-# Command to keep container running (will be overridden in docker-compose)
-CMD ["tail", "-f", "/dev/null"]
+CMD ["sh", "-c", "uvicorn src.api.main:app --host 0.0.0.0 --port 8000 & dagster-webserver -h 0.0.0.0 -p 3000"]
